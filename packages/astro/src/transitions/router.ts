@@ -2,6 +2,13 @@ import type { TransitionBeforePreparationEvent, TransitionBeforeSwapEvent } from
 import { TRANSITION_AFTER_SWAP, doPreparation, doSwap } from './events.js';
 import type { Direction, Fallback, Options } from './types.js';
 
+declare global {
+	interface ImportMetaEnv { [key: string]: any }
+	interface ImportMeta {
+		readonly env: ImportMetaEnv;
+	}
+}
+
 type State = {
 	index: number;
 	scrollX: number;
@@ -11,7 +18,7 @@ type Events = 'astro:page-load' | 'astro:after-swap';
 
 // Create bound versions of pushState/replaceState so that Partytown doesn't hijack them,
 // which breaks Firefox.
-const inBrowser = import.meta.env.SSR === false;
+const inBrowser = (import.meta.env?.SSR ?? true) === false;
 const pushState = (inBrowser && history.pushState.bind(history)) as typeof history.pushState;
 const replaceState = (inBrowser &&
 	history.replaceState.bind(history)) as typeof history.replaceState;

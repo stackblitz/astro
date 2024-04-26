@@ -1,0 +1,31 @@
+{
+  "name": "@stackblitz/astro-transitions",
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./ViewTransitions.astro": {
+      "types": "./ViewTransitions.d.ts",
+      "import": "./dist/ViewTransitions.astro"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stackblitz/astro.git"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "prepack": "pnpm build"
+  },
+  "files": [
+    "dist",
+    "index.d.ts",
+    "index.js"
+  ],
+  "devDependencies": {
+    "@types/dom-view-transitions": "^1.0.4"
+  }
+}
