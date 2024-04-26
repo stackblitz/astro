@@ -372,14 +372,15 @@ async function updateDOM(
 		document.head.append(...beforeSwapEvent.newDocument.head.children);
 
 		// Persist elements in the existing body
-		const oldBody = document.body;
+		const oldRoot = document.body.querySelector('[data-swap-root]') ?? document.body;
+		const newRoot = beforeSwapEvent.newDocument.body.querySelector('[data-swap-root]') ?? beforeSwapEvent.newDocument.body;
 
 		const savedFocus = saveFocus();
 
 		// this will reset scroll Position
-		document.body.replaceWith(beforeSwapEvent.newDocument.body);
+		oldRoot.replaceWith(newRoot);;
 
-		for (const el of oldBody.querySelectorAll(`[${PERSIST_ATTR}]`)) {
+		for (const el of oldRoot.querySelectorAll(`[${PERSIST_ATTR}]`)) {
 			const id = el.getAttribute(PERSIST_ATTR);
 			const newEl = document.querySelector(`[${PERSIST_ATTR}="${id}"]`);
 			if (newEl) {
