@@ -17,8 +17,11 @@ await Promise.all([
 	await sed('astro:transitions/client', '..', './dist/ViewTransitions.astro'),
 ])
 
+const child = spawn('tsc', { stdio: 'inherit' });
 
-spawn('tsc', { stdio: 'inherit' })
+child.on('exit', () => {
+	console.log('Build finished');
+});
 
 async function sed(match, replacement, filePath) {
 	const content = await fs.readFile(filePath, { encoding: 'utf-8' })
