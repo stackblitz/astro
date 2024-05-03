@@ -1,7 +1,7 @@
 {
   "name": "@stackblitz/astro-transitions",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": {
     ".": {
       "types": "./index.d.ts",
